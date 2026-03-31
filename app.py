@@ -89,6 +89,50 @@ def save_drill(text):
     conn.commit()
     conn.close()
 
+import random
+
+# -------------------------
+# GENERADOR DE DRILLS
+# -------------------------
+def generate_drills(n=20):
+
+    sujetos = ["Ich", "Du", "Er", "Wir", "Sie"]
+    
+    verbos = [
+        ("gebe", "gibst", "gibt", "geben", "geben"),
+        ("zeige", "zeigst", "zeigt", "zeigen", "zeigen"),
+        ("erkläre", "erklärst", "erklärt", "erklären", "erklären"),
+        ("bringe", "bringst", "bringt", "bringen", "bringen"),
+        ("kaufe", "kaufst", "kauft", "kaufen", "kaufen")
+    ]
+
+    dativos = [
+        ("🔵meinem Vater", "🔵deinem Vater", "🔵seinem Vater", "🔵unserem Vater", "🔵ihrem Vater"),
+        ("🔴meiner Mutter", "🔴deiner Mutter", "🔴seiner Mutter", "🔴unserer Mutter", "🔴ihrer Mutter"),
+        ("🟢meinem Kind", "🟢deinem Kind", "🟢seinem Kind", "🟢unserem Kind", "🟢ihrem Kind")
+    ]
+
+    acusativos = [
+        ("🔵meinen Bruder", "🔵deinen Bruder", "🔵seinen Bruder", "🔵unseren Bruder", "🔵ihren Bruder"),
+        ("🔴meine Tasche", "🔴deine Tasche", "🔴seine Tasche", "🔴unsere Tasche", "🔴ihre Tasche"),
+        ("🟢mein Buch", "🟢dein Buch", "🟢sein Buch", "🟢unser Buch", "🟢ihr Buch")
+    ]
+
+    drills = []
+
+    for _ in range(n):
+        i = random.randint(0, 4)
+
+        sujeto = sujetos[i]
+        verbo = random.choice(verbos)[i]
+        dativo = random.choice(dativos)[i]
+        acusativo = random.choice(acusativos)[i]
+
+        frase = f"{sujeto} {verbo} 🟣{dativo} 🟡{acusativo}"
+        drills.append(frase)
+
+    return drills
+
 # -------------------------
 # ROUTES
 # -------------------------
@@ -144,6 +188,14 @@ def serve_audio(filename):
     path = os.path.join(AUDIO_FOLDER, filename)
     return send_file(path)
 
+@app.route("/generate")
+def generate():
+    drills = generate_drills(20)
+
+    for d in drills:
+        save_drill(d)
+
+    return redirect(url_for("index"))
 
 
 # -------------------------
