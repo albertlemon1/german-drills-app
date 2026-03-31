@@ -1,0 +1,35 @@
+body {
+    font-family: Arial;
+    padding: 20px;
+}
+
+.container {
+    max-width: 600px;
+    margin: auto;
+}
+
+.top-bar {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+#qr {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+}
+
+/* COLOR SYSTEM */
+.masc { color: blue; }
+.fem { color: red; }
+.neu { color: green; }
+
+.akk {
+    background: yellow;
+}
+
+.dat {
+    background: purple;
+    color: white;
+}

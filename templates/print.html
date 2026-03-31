@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Print Drills</title>
+
+    <style>
+        body {
+            font-family: Arial;
+        }
+
+        .qr {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        @media print {
+            button {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<h2>Drills</h2>
+
+<div class="qr">
+    <img src="{{ qr_url }}" width="150">
+    <p>Escanea para escuchar audios</p>
+</div>
+
+{% for drill in drills %}
+    <p>{{ drill[0] }}</p>
+{% endfor %}
+
+</body>
+</html>

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>German Drills</title>
+</head>
+<body>
+
+<h2>Generador de Drills</h2>
+
+<form method="POST">
+    <textarea name="content" rows="10" cols="80"
+    placeholder="Pega aquí los drills..."></textarea><br><br>
+
+    <button type="submit">🎧 Generar + Guardar</button>
+</form>
+
+<hr>
+<h2>Drills guardados</h2>
+
+<table border="1" cellpadding="8">
+    <tr>
+        <th>Frase</th>
+        <th>Audio</th>
+    </tr>
+
+    {% for drill in drills %}
+    <tr>
+        <td>{{ drill[1] }}</td>
+        <td>
+            <audio controls>
+                <source src="{{ drill[2] }}" type="audio/mpeg">
+            </audio>
+        </td>
+    </tr>
+    {% endfor %}
+</table>
+
+<br>
+
+<button onclick="window.location.href='/print'">🖨️ Vista impresión</button>
+<button onclick="window.print()">🖨️ Imprimir directo</button>
+
+</body>
+</html>
