@@ -58,7 +58,7 @@ def generate_audio(text):
     tts = gTTS(clean, lang="de")
     tts.save(filepath)
 
-    return clean, filepath
+    return clean, filename
 
 # -------------------------
 # GENERATE QR (DINÁMICO)
@@ -136,6 +136,15 @@ def print_view():
         drills=drills,
         qr_url=qr_path
     )
+
+from flask import send_file
+
+@app.route("/audio/<filename>")
+def serve_audio(filename):
+    path = os.path.join(AUDIO_FOLDER, filename)
+    return send_file(path)
+
+
 
 # -------------------------
 # RUN (COMPATIBLE CON RENDER)
