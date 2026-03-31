@@ -44,5 +44,50 @@
     <button type="button">⚡ Generar drills</button>
 </a>
 
+<button onclick="generateAI()">🧠 Generar con IA</button>
+
+<script>
+async function generateAI() {
+    const res = await fetch("/generate_ai", {
+        method: "POST"
+    });
+
+    const data = await res.json();
+
+    location.reload(); // o render dinámico
+}
+</script>
+
+
+<button onclick="generar()">Generar drills</button>
+
+<div id="result"></div>
+
+<script>
+async function generar() {
+    const res = await fetch("/generate_ai", {
+        method: "POST"
+    });
+
+    const data = await res.json();
+
+    let html = "";
+
+    data.forEach(d => {
+        html += `
+            <p>${d.text}</p>
+            <audio controls src="${d.audio}"></audio>
+            <hr>
+        `;
+    });
+
+    document.getElementById("result").innerHTML = html;
+}
+</script>
+
+
+
+
+
 </body>
 </html>
