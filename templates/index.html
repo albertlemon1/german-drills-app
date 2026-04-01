@@ -7,11 +7,23 @@
 
 <h2>Generador de Drills</h2>
 
-<form method="POST">
-    <textarea name="content" rows="10" cols="80"
-    placeholder="Pega aquí los drills..."></textarea><br><br>
+<form action="/" method="post">
+    <textarea name="content" rows="10" placeholder="Pega tus drills aquí..."></textarea>
+    
+    <div class="engine-selector">
+        <label><strong>Motor de Voz:</strong></label>
+        <input type="radio" id="edge" name="engine" value="edge" checked>
+        <label for="edge">Microsoft (Edge-TTS - Natural)</label>
+        
+        <input type="radio" id="google" name="engine" value="google">
+        <label for="google">Google (gTTS - Estándar)</label>
+    </div>
 
-    <button type="submit">🎧 Generar + Guardar</button>
+    <button type="submit">Generar Audios</button>
+    <a href="{{ url_for('generate', engine='edge') }}" class="btn">Generar 10 con IA (Microsoft)</a>
+<a href="{{ url_for('generate', engine='google') }}" class="btn">Generar 10 con IA (Google)</a>
+
+
 </form>
 
 <hr>
